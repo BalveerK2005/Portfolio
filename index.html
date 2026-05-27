@@ -1,0 +1,110 @@
+---
+layout: null
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Portfolio</title>
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <style>
+        :root {
+            --primary: #2C3E50;
+            --secondary: #18BC9C;
+            --bg-color: #F8F9FA;
+            --text-dark: #333333;
+            --text-light: #FFFFFF;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+        header {
+            background-color: var(--primary);
+            color: var(--text-light);
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+        header h1 { margin: 0; font-size: 2.5rem; }
+        header p { font-size: 1.2rem; color: var(--secondary); margin-top: 10px; }
+        .container { max-width: 1100px; margin: auto; padding: 2rem; }
+        .section-title { text-align: center; margin-bottom: 2rem; font-size: 2rem; color: var(--primary); }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        .card {
+            background: var(--text-light);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 1.5rem;
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        .card:hover { transform: translateY(-5px); }
+        .card h3 { color: var(--primary); margin-top: 0; }
+        .btn {
+            display: inline-block;
+            background: var(--secondary);
+            color: var(--text-light);
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: auto;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Portfolio Overview</h1>
+        <p>Mechanical Engineering | AI & Automation | Data Analytics</p>
+    </header>
+
+    <div class="container">
+        <h2 class="section-title">Ventures & Projects</h2>
+        <div class="grid">
+            {% for venture in site.ventures %}
+            <div class="card">
+                <h3>{{ venture.title }}</h3>
+                <p><strong>Role:</strong> {{ venture.role }}</p>
+                <p>{{ venture.description }}</p>
+                <a href="{{ venture.url }}" class="btn">View Details</a>
+            </div>
+            {% endfor %}
+        </div>
+
+        <br><br>
+
+        <h2 class="section-title">Insights & Updates</h2>
+        <div class="grid">
+            {% for post in site.posts limit:3 %}
+            <div class="card">
+                <h3>{{ post.title }}</h3>
+                <p><em>{{ post.date | date: "%B %d, %Y" }}</em></p>
+                <p>{{ post.excerpt | strip_html | truncatewords: 25 }}</p>
+                <a href="{{ post.url }}" class="btn">Read More</a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script>
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.on("init", user => {
+          if (!user) {
+            window.netlifyIdentity.on("login", () => { document.location.href = "/admin/"; });
+          }
+        });
+      }
+    </script>
+</body>
+</html>
