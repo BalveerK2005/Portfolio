@@ -1,0 +1,8 @@
+title: Professional Portfolio
+description: Mechanical Engineering | AI & Automation | Data Analytics
+theme: minima
+
+# This tells GitHub to process your custom ventures folder
+collections:
+  ventures:
+    output: true
