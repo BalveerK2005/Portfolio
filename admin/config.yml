@@ -1,0 +1,27 @@
+backend:
+  name: github
+  repo: balveerk/portfolio # <-- CHANGE THIS
+  branch: main
+
+media_folder: "assets/images"
+public_folder: "/assets/images"
+
+collections:
+  - name: "ventures"
+    label: "Ventures & Projects"
+    folder: "_ventures"
+    create: true
+    fields:
+      - {label: "Project Name", name: "title", widget: "string"}
+      - {label: "Role/Contribution", name: "role", widget: "string"}
+      - {label: "Short Description", name: "description", widget: "text"}
+      - {label: "Detailed Case Study", name: "body", widget: "markdown"}
+
+  - name: "blog"
+    label: "Blog & Insights"
+    folder: "_posts"
+    create: true
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Publish Date", name: "date", widget: "datetime"}
+      - {label: "Content", name: "body", widget: "markdown"}
